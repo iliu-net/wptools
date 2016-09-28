@@ -1,0 +1,21 @@
+<?php
+/*
+Plugin Name: iLiu WP Tools
+Plugin URI: http://github/iliu-net/WP-Tools
+Description: Collection of Miscellaneous WordPress tools
+Version: 1.0
+Author: Various
+Author URI: http://github/iliu-net
+License: Various but mostly GPLv2 or later
+*/
+defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
+include("includes/categories-in-hierarchical-order.php");
+include("includes/categories.php");
+include("includes/cond_content.php");
+include("includes/embed.php");
+include("includes/list_add_ons.php");
+include("includes/newestpost.php");
+include("includes/post_link_shortcode.php");
+include("includes/related.php");
+include("includes/xml_sitemap_generator.php");
