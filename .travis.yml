@@ -6,7 +6,7 @@ before_deploy:
 - assets=$(echo *)
 - mkdir iliu-wptools
 - cp -al $assets iliu-wptools
-- [ -n "$TRAVIS_TAG" ] && zip -r iliu-wptools.$TRAVIS_TAG.zip iliu-wptools
+- if [ -n "$TRAVIS_TAG" ] ; then zip -r iliu-wptools.$TRAVIS_TAG.zip iliu-wptools ; fi
 - rm -rf iliu-wptools
 deploy:
   provider: releases
