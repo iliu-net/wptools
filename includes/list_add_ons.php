@@ -42,6 +42,8 @@ function list_plugins_shortcode( $atts ) {
   $txt .= '</table>';
   return $txt;
 }
+add_shortcode( 'list_plugins', 'list_plugins_shortcode');
+
 /**
  * List installed themes
  *
@@ -84,5 +86,4 @@ function list_themes_shortcode( $atts ) {
   return $txt;
 }
 
-add_shortcode( 'list_plugins', 'list_plugins_shortcode');
 add_shortcode( 'list_themes', 'list_themes_shortcode');

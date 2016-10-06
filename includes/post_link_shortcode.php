@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Post link shortcode
-Plugin URI: http://blog.scur.pl/wordpress-post-link-shortcode/
-Description: Adds [post] shortcode that returns either a URL or anchor to a post
-Version: 1.0
-Author: Michał Ochman
-Author URI: http://scur.pl/
-License: GPLv2 or later
+x-Plugin Name: Post link shortcode
+x-Plugin URI: http://blog.scur.pl/wordpress-post-link-shortcode/
+x-Description: Adds [post] shortcode that returns either a URL or anchor to a post
+x-Version: 1.0
+x-Author: Michał Ochman
+x-Author URI: http://scur.pl/
+x-License: GPLv2 or later
 */
 /*  Copyright 2012 Michał Ochman
 
