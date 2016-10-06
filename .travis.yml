@@ -1,0 +1,16 @@
+language: php
+script:
+- find . -name '*.php' -print0 | xargs -0 -n 1
+before_deploy: 
+- rmdir -f iliu-wptools
+- assets=$(echo *)
+- mkdir iliu-wptools
+- cp -al $assets iliu-wptools
+deploy:
+  provider: releases
+  file_glob: true
+  api_key:
+    secure: eyLVJN5IWezKp1qHTO93TXxiDeQSEDr4i9SZJW9L4WfeVsm5MUb+vcb91kdxDb9wprURymsqJCNXzJ3oQPOm3dzsh0ajvHe3uDp1gwUjPHyTblVE+Jovv/QOCDV/HNsTG9P5LNIP17OHsD4DHgZtR1zz7TWOEdqlnj6FAgIleNaEe8xHS4sbpKdw7W1Wp1DGqGr0Wv+MLlpPHyWQ+4edpdXW+CiA2HBWvFsEsrOP+2msRTxnN2igFKiYhhrGboGSts7yw2KGaCCSWts9IeHxTnkJ3D3ZjuqA6ZAvRxLIJIiJWfsq+E+cyzzyfRZ+jwptbyGn6+P907FwRN2EpOTAir0nrc8w5E/hWB4gvS+tTnNBaUVrbupwm+fzM577zjtzPxAVcg7RHf5n7f1uaZf/O+3hNl2enbJRSOT0VCdrne5xdQr5sC6QMWRZGc+Lgql5xYUB4dSgNQgdVUG6FlKgpo+3ZL9oMyjXCg+Hu1VvSVjOQi5U0XF6TNSTdmC301zvMtipMZRLAsOMqBV4wtezJsWP19/jHjnLKKywJFdK2M2hlNvNXLVJaNw3SSdRRsZjSofoj84ZuArE85Zk81FfGCD/NHI5TYFDfnQ+UW+U9D+64qRZp/s4/jGJtx282FJvWs/9rvJBH2kCq1vmvBk5Hwlm1b4eKhFRuE8BITsKrOM=
+  file: iliu-wptools.*.zip
+  on:
+    repo: iliu-net/wptools
