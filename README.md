@@ -12,8 +12,6 @@ improvements.
 
 Features:
 
-- categories-in-hierarchical-order: based on this
-  [plugin](https://wordpress.org/plugins/categories-in-hierarchical-order/)
 - categories : shortcode that shows the current post's 
   categories.
 - cond_content : Different way to conditionally show (or hide)
