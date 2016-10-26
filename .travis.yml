@@ -1,24 +1,26 @@
 language: php
+php:
+- '5.4'
+env:
+  global:
+  - secure: K+qcLf1IP+/t+8wgwriPswFFSGgNTRSNHuE6971S2KnMDPO+TXsLBvxPamhEL1mPtMXHiO/fCSMdNx9p7s6ur1RGFg06hdo8ZOXgb+2+xHeAo9PoCgT8N3E8FBG3eyHekbzGsd5DdSjY3MElvDPODbqdZNIB5a9FIvmJkaXeaB+tootDyaz95aTnLk4zmjjZR08/C5tqVpdaPBYW5ipKdF/KTloKR7nDlNDXubMxL3I6EGlxFqcoXkbde5zBqLOxaMa3bPjy4oWdVCEjaTuDIBWMgTytFyBQP3xW7QA1+CkcKuJ/E7FDh8LQoJeudbufTF8Q243Vdl+0eGBJcX9mH6wtCbFViiWq9vWohJhmZB5/7Pyi6DtfceAomgaG9B1VbbH/iZjWf0MW+iH4xhH0223x/KPxrCA4iQSvDdcSvVyxE+TTEhuCrGXvV7djlS/fGTisrPL4AsIoWLc+QthH+XN/tB31XdeYejlbac7i5oQGXba1IRWJMoGVGEzDfnHXHZ7DrnoihH4kj4n84Vy/rAmuCsr9uObLLOt/c9Zkna7tkVZzRfKhFpGvbtdgljPocdTlVbh3En2laRVdGW8gu8qCkoLlmkPJbnX+N6jBXNs4kGaNmWaL+vCuPDk1kBciyLNWxkXGtT3n/764Ugt4zls46QcStybBporppEkGeYU=
+  - secure: WuNEvjbH2cxL2GRWfC7g+AqnNPgiJcIrXWjXk8897lU3uiWblNNtgBREJYbQNkY3vfAMie5f6HkxfaEiGVWyRV0JjX8Xxoa8P+xXjEJoYpne+fcQT0Ly68VRUCnMVCrn8ORj3GGm/YXYFypoqMYLNZJzkimd89BwB7VDvgMMVN+S+4FGKUUBVQX8fIddEZbJGiIC2W9/K3XjKj8oVsL39TXI9JRGTMjXG/FbEuMnNKJDXhwzVW34uUxMJbB0NYdJiHDD45wD0Z71puOKqi1iH4kz5OIOoKVoFqg1o/8no4E6rSuxYzTBqg1L8DMgqDZkUYQ2hET5mZ/W/tMGF/4b5MqCHZ7HjnunZhiKFwGkMcJ6fr6oDmUDdHlX2CHcwwYqggK8DfKog9EL0O4VTXRqKqxoQ5BXv16XmKNH14h5AYIUAtMF+rJNv17eSOQgKjZVRVqdiWpnqNZgNF+P5mcArk361rXYstQH/V+ryhNKKqSTRDWRjypvGJgn4jOBm3Zja5lo4cqox29lvwfvjT6378JztbWG6F+7ZKcc1HP0KZXZ5w39xv+Btmjm1iBLRynEcFQq6mk+lLa6lT2bQv/o/i+dI3LUxfrt8WCeIJzB+5M0QsFcTBrl3eBcBEtl8CA7+dsXbfKkvmI6FliwnoKLx4yO4dghuKxqzT4gOSTjKU8=
 script:
-- for php in $(find . -name '*.php' -type f) ; do if ! php -l $php ; then exit 1; fi ; done
-
-before_deploy: 
-- rm -rf iliu-wptools
+- "./ci-utils/phpcheck && ./ci-utils/pushplug.sh"
+before_deploy:
+- rm -rf $(echo ${TRAVIS_REPO_SLUG} | cut -d/ -f1)
 - assets=$(echo *)
-- mkdir iliu-wptools
-- cp -al $assets iliu-wptools
-- if [ -n "$TRAVIS_TAG" ] ; then zip -r iliu-wptools.$TRAVIS_TAG.zip iliu-wptools ; fi
-- rm -rf iliu-wptools
-
+- mkdir -p ${TRAVIS_REPO_SLUG}
+- cp -al $assets ${TRAVIS_REPO_SLUG}
+- if [ -n "$TRAVIS_TAG" ] ; then zip -r ${TRAVIS_REPO_SLUG}.$TRAVIS_TAG.zip ${TRAVIS_REPO_SLUG}
+  && mv ${TRAVIS_REPO_SLUG}.$TRAVIS_TAG.zip . ; fi
+- rm -rf ${TRAVIS_REPO_SLUG}
 deploy:
   provider: releases
   file_glob: true
   api_key:
     secure: eyLVJN5IWezKp1qHTO93TXxiDeQSEDr4i9SZJW9L4WfeVsm5MUb+vcb91kdxDb9wprURymsqJCNXzJ3oQPOm3dzsh0ajvHe3uDp1gwUjPHyTblVE+Jovv/QOCDV/HNsTG9P5LNIP17OHsD4DHgZtR1zz7TWOEdqlnj6FAgIleNaEe8xHS4sbpKdw7W1Wp1DGqGr0Wv+MLlpPHyWQ+4edpdXW+CiA2HBWvFsEsrOP+2msRTxnN2igFKiYhhrGboGSts7yw2KGaCCSWts9IeHxTnkJ3D3ZjuqA6ZAvRxLIJIiJWfsq+E+cyzzyfRZ+jwptbyGn6+P907FwRN2EpOTAir0nrc8w5E/hWB4gvS+tTnNBaUVrbupwm+fzM577zjtzPxAVcg7RHf5n7f1uaZf/O+3hNl2enbJRSOT0VCdrne5xdQr5sC6QMWRZGc+Lgql5xYUB4dSgNQgdVUG6FlKgpo+3ZL9oMyjXCg+Hu1VvSVjOQi5U0XF6TNSTdmC301zvMtipMZRLAsOMqBV4wtezJsWP19/jHjnLKKywJFdK2M2hlNvNXLVJaNw3SSdRRsZjSofoj84ZuArE85Zk81FfGCD/NHI5TYFDfnQ+UW+U9D+64qRZp/s4/jGJtx282FJvWs/9rvJBH2kCq1vmvBk5Hwlm1b4eKhFRuE8BITsKrOM=
-  file: iliu-wptools.*.zip
+  file: "*.zip"
   on:
     repo: iliu-net/wptools
     tags: true
-
-
-
