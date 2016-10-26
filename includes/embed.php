@@ -15,14 +15,25 @@ add_shortcode('embedpdf', 'viewpdf');
 /**
  * Embed a Youtube video
  *
+ * You can specify the video ID or a Playlist (or both).
+ *
  * Example:
- * - [youtube width="xxxpx" height="xxxpx" id=XXX](optional text)[/embedpdf]
+ * - [youtube width="xxxpx" height="xxxpx" id=XXX playlist=YYYY](optional text)[/embedpdf]
  */
 function embed_youtube($atts, $content=null){
-  extract(shortcode_atts( array('id' => '', 'width'=>480, 'height'=>320), $atts));
+  extract(shortcode_atts( array('id' => '', 'width'=>480, 'height'=>320, 'playlist'=>''), $atts));
   $return = $content;
   if($content) $return .= "<br /><br />";
-  $return .= '<iframe width="'.$width.'" height="'.$height.'" src="http://www.youtube.com/embed/' . $id . '" frameborder="0" allowfullscreen></iframe>';   
+  if ($id || $playlist) {
+    $return .= '<iframe width="'.$width.'" height="'.$height.'" src="https://www.youtube.com/embed/';
+    $return .= $id ? $id : 'videoseries';
+    if ($playlist) $return .= '?list='.$playlist;
+    $return .= '" frameborder="0" allowfullscreen>';
+    $return .= '</iframe>';
+  } else {
+    $return .= 'MISSING_ID_OR_PLAYLIST';
+  }
+  
   return $return; 
 }
 add_shortcode('youtube', 'embed_youtube');

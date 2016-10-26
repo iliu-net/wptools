@@ -38,4 +38,5 @@ Features:
 
 ## Changes
 
+- 1.1 : Updated youtube shortcode
 - 1.0 : First release
