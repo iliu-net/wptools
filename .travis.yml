@@ -1,6 +1,7 @@
 language: php
 script:
-- find . -name '*.php' -print0 | xargs -0 -n 1 php -l
+- for php in $(find . -name '*.php' -type f) ; do if ! php -l $php ; then exit 1; fi ; done
+
 before_deploy: 
 - rm -rf iliu-wptools
 - assets=$(echo *)
@@ -8,6 +9,7 @@ before_deploy:
 - cp -al $assets iliu-wptools
 - if [ -n "$TRAVIS_TAG" ] ; then zip -r iliu-wptools.$TRAVIS_TAG.zip iliu-wptools ; fi
 - rm -rf iliu-wptools
+
 deploy:
   provider: releases
   file_glob: true
@@ -16,3 +18,7 @@ deploy:
   file: iliu-wptools.*.zip
   on:
     repo: iliu-net/wptools
+    tags: true
+
+
+
