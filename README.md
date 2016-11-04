@@ -38,5 +38,8 @@ Features:
 
 ## Changes
 
+- 1.2 : 
+  - Added a little update notifier for non-admin members
+  - Fixed member shortcodes
 - 1.1 : Updated youtube shortcode
 - 1.0 : First release

@@ -18,3 +18,5 @@ include("includes/newestpost.php");
 include("includes/post_link_shortcode.php");
 include("includes/related.php");
 include("includes/xml_sitemap_generator.php");
+include('includes/update_notice.php');
+

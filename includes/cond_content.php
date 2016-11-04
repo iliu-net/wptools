@@ -67,7 +67,8 @@ add_shortcode( 'enrole', 'enrole_shortcode');
  * - [guest]Shown text[/guest]
  */
 function visitor_check_shortcode( $atts, $content = null ) {
-  if ( ( !is_user_logged_in() && !is_null( $content ) ) || is_feed() ) return $content;
+  if ( ( !is_user_logged_in() && !is_null( $content ) ) || is_feed() )
+    return do_shortcode($content);
   return '';
 }
 add_shortcode( 'guest', 'visitor_check_shortcode' );
@@ -80,7 +81,8 @@ add_shortcode( 'guest', 'visitor_check_shortcode' );
  * - [member]Shown text[/member]
  */
 function member_check_shortcode( $atts, $content = null ) {
-  if ( is_user_logged_in() && !is_null( $content ) && !is_feed() ) return $content;
+  if ( is_user_logged_in() && !is_null( $content ) && !is_feed() )
+    return do_shortcode($content);
   return '';
 }
 add_shortcode( 'member', 'member_check_shortcode' );
@@ -93,6 +95,6 @@ add_shortcode( 'member', 'member_check_shortcode' );
  */
 function feedonly_shortcode( $atts, $content = null) {
   if (!is_feed()) return "";
-  return $content;
+  return do_shortcode($content);
 }
 add_shortcode('feedonly', 'feedonly_shortcode');
