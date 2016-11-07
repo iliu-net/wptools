@@ -3,7 +3,7 @@
 Plugin Name: iLiu WP Tools
 Plugin URI: http://github/iliu-net/wptools
 Description: Collection of Miscellaneous WordPress tools
-Version: 1.1
+Version: 1.2
 Author: Various
 Author URI: http://github/iliu-net
 License: Various but mostly GPLv2 or later
