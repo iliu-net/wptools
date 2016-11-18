@@ -28,6 +28,10 @@ Features:
 - related : show related posts based on tags.
 - xml_sitemap_generator : Creates a url {wordpress}/xml_sitemap.xml
   which can be submitted to search engines.
+- update notifier: Lets non-admin member that plugins need updating.
+  I use this myself because I usually do not login as network admin.
+- redirect_shortcode : A short code to help redirect pages.
+
 
 
 ## Installation
@@ -38,6 +42,8 @@ Features:
 
 ## Changes
 
+- 1.3 :
+  - Redirect short code
 - 1.2 : 
   - Added a little update notifier for non-admin members
   - Fixed member shortcodes
